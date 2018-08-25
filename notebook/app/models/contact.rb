@@ -1,8 +1,9 @@
 class Contact < ApplicationRecord
   belongs_to :kind
-  has_one :address
   has_many :phones
-
-  accepts_nested_attributes_for :address
+  has_one :address
+ 
   accepts_nested_attributes_for :phones
+  accepts_nested_attributes_for :address
+  
 end

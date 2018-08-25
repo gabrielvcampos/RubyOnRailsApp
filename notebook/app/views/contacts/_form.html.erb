@@ -1,4 +1,4 @@
-<%= form_with(model: contact, local: true, class: 'basic-grey') do |form| %>
+<%= form_with(model: contact, class: 'basic-grey') do |form| %>
   <% if contact.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
@@ -28,7 +28,7 @@
   </div>
 
   
-  <%= fields_for @contact.address do |address_fields| %>
+  <%= form.fields_for @contact.address do |address_fields| %>
     <div class="field"> 
         <%= address_fields.label :street %>
         <%= address_fields.text_field :street %>
@@ -40,6 +40,13 @@
     <div class="field"> 
         <%= address_fields.label :state %>
         <%= address_fields.select(:state, options_for_select([["Bahia", "BA"], ["São Paulo", "SP"]])) %>
+    </div>
+  <% end %>
+
+  <%= form.fields_for @contact.phones do |phones_fields| %>
+    <div class="field"> 
+        <%= phones_fields.label :phone %>
+        <%= phones_fields.text_field :phone %>
     </div>
   <% end %>
 

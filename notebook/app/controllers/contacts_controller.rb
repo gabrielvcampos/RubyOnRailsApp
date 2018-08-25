@@ -13,9 +13,11 @@ class ContactsController < ApplicationController
   def show
   end
 
-  # GET /contacts/new
+  # GET /contacts/newrails 
   def new
     @contact = Contact.new
+    @contact.build_address
+    @contact.build_kind
 
     @kinds_select = options_for_select
     
@@ -24,6 +26,7 @@ class ContactsController < ApplicationController
   # GET /contacts/1/edit
   def edit
     @kinds_select = options_for_select
+
   end
 
   # POST /contacts
@@ -71,13 +74,14 @@ class ContactsController < ApplicationController
     def options_for_select
       return Kind.all
     end
-    # Use callbacks to share common setup or constraints between actions.
+    # Use callbacks to share comm@on setup or constraints between actions.
     def set_contact
       @contact = Contact.find(params[:id])
+      @contact.phones = Phones.where("contact_id = #{@contact.id}")
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contact_params
-      params.require(:contact).permit(:name, :email, :kind_id, :rmk, address_attributes: [:street, :city, :state], phones_attributes: [:phone])
+      params.require(:contact).permit(:name, :email, :kind_id, :rmk, address_attributes => [:street, :city, :state], phones_attributes => [:id, :phone, :contact_id])
     end
 end
