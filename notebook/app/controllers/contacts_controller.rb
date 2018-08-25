@@ -77,7 +77,6 @@ class ContactsController < ApplicationController
     # Use callbacks to share comm@on setup or constraints between actions.
     def set_contact
       @contact = Contact.find(params[:id])
-      @contact.phones = Phones.where("contact_id = #{@contact.id}")
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -26,9 +26,8 @@
     <%= form.label :kind_id %>
     <%= form.collection_select(:kind_id, @kinds_select, :id, :description)%>
   </div>
-
   
-  <%= form.fields_for @contact.address do |address_fields| %>
+  <%= form.fields_for :address do |address_fields| %>
     <div class="field"> 
         <%= address_fields.label :street %>
         <%= address_fields.text_field :street %>
@@ -43,10 +42,10 @@
     </div>
   <% end %>
 
-  <%= form.fields_for @contact.phones do |phones_fields| %>
-    <div class="field"> 
-        <%= phones_fields.label :phone %>
-        <%= phones_fields.text_field :phone %>
+  <%= form.fields_for :phones do |phones_fields| %>
+    <div class="field">
+      <%= phones_fields.label :phone %>
+      <%= phones_fields.text_field :phone %>
     </div>
   <% end %>
 
